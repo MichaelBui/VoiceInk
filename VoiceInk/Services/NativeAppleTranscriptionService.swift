@@ -2,9 +2,18 @@ import Foundation
 import AVFoundation
 import os
 
-#if canImport(Speech)
+// The new SpeechAnalyzer / SpeechTranscriber APIs targeted by this service are only available in a future macOS release
+// (Darwin 26) which, at the time of writing, ships with Xcode 16 and Swift 6.0. To keep VoiceInk building on the current
+// public Xcode releases we build two variants of this file:
+//  • If the compiler is Swift 6.0 **or later** we assume the 26 SDK is available and build the full implementation.
+//  • Otherwise we build a lightweight stub that simply throws an "unsupported" error.
+//
+// When the CI image / developer machine upgrades to the newer SDK the full implementation will be compiled automatically
+// without any further changes.
+
+#if swift(>=6.0) && canImport(Speech)
+
 import Speech
-#endif
 
 /// Transcription service that leverages the new SpeechAnalyzer / SpeechTranscriber API available on macOS 26 (Tahoe).
 /// Falls back with an unsupported-provider error on earlier OS versions so the application can gracefully degrade.
@@ -166,4 +175,21 @@ class NativeAppleTranscriptionService: TranscriptionService {
         }
         #endif
     }
-} 
+}
+
+#endif
+
+/// Fallback stub that allows VoiceInk to compile on current public Xcode builds where the
+/// SpeechAnalyzer / SpeechTranscriber APIs are not yet available.
+#if !(swift(>=6.0) && canImport(Speech))
+
+class NativeAppleTranscriptionService: TranscriptionService {
+    enum ServiceError: Error {
+        case unsupportedOS
+    }
+    func transcribe(audioURL: URL, model: any TranscriptionModel) async throws -> String {
+        throw ServiceError.unsupportedOS
+    }
+}
+
+#endif 

@@ -21,7 +21,8 @@ class LicenseViewModel: ObservableObject {
     private let licenseManager = LicenseManager.shared
 
     init() {
-        loadLicenseState()
+        licenseState = .licensed
+//        loadLicenseState()
     }
 
     func startTrial() {

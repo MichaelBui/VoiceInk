@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E11BBA4E2E5DC555000AB839 /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = E11BBA4D2E5DC555000AB839 /* FluidAudio */; };
-		E1342C1F2EB4844800CED8A2 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = E1342C1E2EB4844800CED8A2 /* Atomics */; };
+		51FFA9F62E40AE390019833B /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51FFA9F42E40ADBE0019833B /* whisper.xcframework */; };
+		51FFA9F72E40AE390019833B /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51FFA9F42E40ADBE0019833B /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E10F06092E3F390600F7FBDC /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = E10F06082E3F390600F7FBDC /* FluidAudio */; };
 		E1A261122CC143AC00B233D1 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E1A261112CC143AC00B233D1 /* KeyboardShortcuts */; };
 		E1ADD45A2CC5352A00303ECB /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E1ADD4592CC5352A00303ECB /* LaunchAtLogin */; };
 		E1ADD45F2CC544F100303ECB /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = E1ADD45E2CC544F100303ECB /* Sparkle */; };
@@ -38,13 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E1A8C8CD2E1257B7003E58EC /* Embed Frameworks */ = {
+		51AF31732E071020002077F1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E1F350122F1D10D600790A2C /* whisper.xcframework in Embed Frameworks */,
+				51FFA9F72E40AE390019833B /* whisper.xcframework in Embed Frameworks */,
 				E1D7EF9A2E35E19B00640029 /* MediaRemoteAdapter in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -53,17 +54,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		51FFA9F42E40ADBE0019833B /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = whisper.xcframework; sourceTree = "<group>"; };
 		E11473B02CBE0F0A00318EE4 /* VoiceInk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceInk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11473C32CBE0F0B00318EE4 /* VoiceInkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceInkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11473CD2CBE0F0B00318EE4 /* VoiceInkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceInkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1A0BD052EB1E7B800266859 /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "$(HOME)/VoiceInk-Dependencies/whisper.cpp/build-apple/whisper.xcframework"; sourceTree = "<group>"; };
-		E1B2DCAA2E3DE70A008DFD68 /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "../whisper.cpp/build-apple/whisper.xcframework"; sourceTree = "<group>"; };
-		E1CE28772E4336150082B758 /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "../build-apple/whisper.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		517F4E1E2E070E31003961B0 /* Exceptions for "VoiceInk" folder in "VoiceInk" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E11473AF2CBE0F0A00318EE4 /* VoiceInk */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E11473B22CBE0F0A00318EE4 /* VoiceInk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				517F4E1E2E070E31003961B0 /* Exceptions for "VoiceInk" folder in "VoiceInk" target */,
+			);
 			path = VoiceInk;
 			sourceTree = "<group>";
 		};
@@ -90,6 +102,8 @@
 				E1ADD45A2CC5352A00303ECB /* LaunchAtLogin in Frameworks */,
 				E11BBA4E2E5DC555000AB839 /* FluidAudio in Frameworks */,
 				E1D7EF992E35E16C00640029 /* MediaRemoteAdapter in Frameworks */,
+				E10F06092E3F390600F7FBDC /* FluidAudio in Frameworks */,
+				51FFA9F62E40AE390019833B /* whisper.xcframework in Frameworks */,
 				E1ADD45F2CC544F100303ECB /* Sparkle in Frameworks */,
 				E1F1037B2EF85FC700A4FF94 /* SelectedTextKit in Frameworks */,
 				E1A261122CC143AC00B233D1 /* KeyboardShortcuts in Frameworks */,
@@ -121,6 +135,7 @@
 				E11473D02CBE0F0B00318EE4 /* VoiceInkUITests */,
 				E114741C2CBE1DE200318EE4 /* Frameworks */,
 				E11473B12CBE0F0A00318EE4 /* Products */,
+				51FFA9F42E40ADBE0019833B /* whisper.xcframework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,9 +152,6 @@
 		E114741C2CBE1DE200318EE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E1A0BD052EB1E7B800266859 /* whisper.xcframework */,
-				E1CE28772E4336150082B758 /* whisper.xcframework */,
-				E1B2DCAA2E3DE70A008DFD68 /* whisper.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,7 +166,7 @@
 				E11473AC2CBE0F0A00318EE4 /* Sources */,
 				E11473AD2CBE0F0A00318EE4 /* Frameworks */,
 				E11473AE2CBE0F0A00318EE4 /* Resources */,
-				E1A8C8CD2E1257B7003E58EC /* Embed Frameworks */,
+				51AF31732E071020002077F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,7 +244,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					E11473AF2CBE0F0A00318EE4 = {
 						CreatedOnToolsVersion = 16.0;
@@ -374,6 +386,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -437,6 +450,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -469,23 +483,27 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 169;
+				CURRENT_PROJECT_VERSION = 170;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VoiceInk/Preview Content\"";
-				DEVELOPMENT_TEAM = V6J6A3VWY2;
+				DEVELOPMENT_TEAM = VKFTL5K3E9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VoiceInk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VoiceInk;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = NO;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "VoiceInk needs to interact with your browser to detect the current website for applying website-specific configurations.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "VoiceInk needs access to your microphone to record audio for transcription.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.69;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInk;
+				MARKETING_VERSION = 1.70;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG ENABLE_NATIVE_SPEECH_ANALYZER $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -503,23 +521,26 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 169;
+				CURRENT_PROJECT_VERSION = 170;
 				DEVELOPMENT_ASSET_PATHS = "\"VoiceInk/Preview Content\"";
-				DEVELOPMENT_TEAM = V6J6A3VWY2;
+				DEVELOPMENT_TEAM = VKFTL5K3E9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VoiceInk/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VoiceInk;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = NO;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "VoiceInk needs to interact with your browser to detect the current website for applying website-specific configurations.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "VoiceInk needs access to your microphone to record audio for transcription.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.69;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInk;
+				MARKETING_VERSION = 1.70;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENABLE_NATIVE_SPEECH_ANALYZER $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -533,11 +554,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = V6J6A3VWY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInkTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -551,11 +573,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = V6J6A3VWY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInkTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -568,10 +591,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = V6J6A3VWY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInkUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -584,10 +608,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = V6J6A3VWY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.prakashjoshipax.VoiceInkUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gigary.VoiceInkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
