@@ -45,9 +45,10 @@ build: setup
 	xcodebuild -project VoiceInk.xcodeproj -scheme VoiceInk -configuration Debug CODE_SIGN_IDENTITY="" build
 
 # Build for local use without Apple Developer certificate
-local: check setup
+local: clean check setup
 	@echo "Building VoiceInk for local use (no Apple Developer certificate required)..."
 	@rm -rf "$(LOCAL_DERIVED_DATA)"
+	@rm -rf ~/Library/Developer/Xcode/DerivedData/VoiceInk-*
 	xcodebuild -project VoiceInk.xcodeproj -scheme VoiceInk -configuration Debug \
 		-derivedDataPath "$(LOCAL_DERIVED_DATA)" \
 		-xcconfig LocalBuild.xcconfig \
@@ -64,9 +65,11 @@ local: check setup
 		rm -rf "$$HOME/Downloads/VoiceInk.app"; \
 		ditto "$$APP_PATH" "$$HOME/Downloads/VoiceInk.app"; \
 		xattr -cr "$$HOME/Downloads/VoiceInk.app"; \
+		rm -rf "/Applications/VoiceInk.app"; \
+		mv -f "$$HOME/Downloads/VoiceInk.app" "/Applications/"; \
 		echo ""; \
-		echo "Build complete! App saved to: ~/Downloads/VoiceInk.app"; \
-		echo "Run with: open ~/Downloads/VoiceInk.app"; \
+		echo "Build complete! App saved to: /Applications/VoiceInk.app"; \
+		echo "Run with: open /Applications/VoiceInk.app"; \
 		echo ""; \
 		echo "Limitations of local builds:"; \
 		echo "  - No iCloud dictionary sync"; \
@@ -78,15 +81,16 @@ local: check setup
 
 # Run application
 run:
-	@if [ -d "$$HOME/Downloads/VoiceInk.app" ]; then \
-		echo "Opening ~/Downloads/VoiceInk.app..."; \
-		open "$$HOME/Downloads/VoiceInk.app"; \
+	@if [ -d "/Applications/VoiceInk.app" ]; then \
+		echo "Opening /Applications/VoiceInk.app..."; \
+		open "/Applications/VoiceInk.app"; \
 	else \
 		echo "Looking for VoiceInk.app in DerivedData..."; \
 		APP_PATH=$$(find "$$HOME/Library/Developer/Xcode/DerivedData" -name "VoiceInk.app" -type d | head -1) && \
 		if [ -n "$$APP_PATH" ]; then \
 			echo "Found app at: $$APP_PATH"; \
-			open "$$APP_PATH"; \
+			mv "$$APP_PATH" "/Applications/VoiceInk.app"; \
+			open "/Applications/VoiceInk.app"; \
 		else \
 			echo "VoiceInk.app not found. Please run 'make build' or 'make local' first."; \
 			exit 1; \
@@ -97,6 +101,8 @@ run:
 clean:
 	@echo "Cleaning build artifacts..."
 	@rm -rf $(DEPS_DIR)
+	@rm -rf "$(LOCAL_DERIVED_DATA)"
+	@rm -rf ~/Library/Developer/Xcode/DerivedData/VoiceInk-*
 	@echo "Clean complete"
 
 # Help

@@ -2,9 +2,18 @@ import Foundation
 import AVFoundation
 import os
 
-#if canImport(Speech)
+// The new SpeechAnalyzer / SpeechTranscriber APIs targeted by this service are only available in a future macOS release
+// (Darwin 26) which, at the time of writing, ships with Xcode 16 and Swift 6.0. To keep VoiceInk building on the current
+// public Xcode releases we build two variants of this file:
+//  • If the compiler is Swift 6.0 **or later** we assume the 26 SDK is available and build the full implementation.
+//  • Otherwise we build a lightweight stub that simply throws an "unsupported" error.
+//
+// When the CI image / developer machine upgrades to the newer SDK the full implementation will be compiled automatically
+// without any further changes.
+
+#if swift(>=6.0) && canImport(Speech)
+
 import Speech
-#endif
 
 /// Transcription service that leverages the new SpeechAnalyzer / SpeechTranscriber API available on macOS 26 (Tahoe).
 /// Falls back with an unsupported-provider error on earlier OS versions so the application can gracefully degrade.
@@ -18,7 +27,7 @@ class NativeAppleTranscriptionService: TranscriptionService {
         case invalidModel
         case assetDownloadRequired(String)
         case resultStreamTimedOut
-        
+
         var errorDescription: String? {
             switch self {
             case .unsupportedOS:
@@ -47,18 +56,18 @@ class NativeAppleTranscriptionService: TranscriptionService {
         guard model is NativeAppleModel else {
             throw ServiceError.invalidModel
         }
-        
+
         guard #available(macOS 26, *) else {
             logger.error("SpeechAnalyzer is not available on this macOS version")
             throw ServiceError.unsupportedOS
         }
-        
+
         // Feature gated: SpeechAnalyzer/SpeechTranscriber are future APIs.
         // Enable by defining ENABLE_NATIVE_SPEECH_ANALYZER in build settings once building against macOS 26+ SDKs.
         #if canImport(Speech) && ENABLE_NATIVE_SPEECH_ANALYZER
         let audioFile = try AVAudioFile(forReading: audioURL)
         let audioDuration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
-        
+
         // Apple Speech stores and consumes actual BCP-47 locale identifiers directly.
         let selectedLanguage = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en-US"
         let locale = Locale(identifier: selectedLanguage)
@@ -69,7 +78,7 @@ class NativeAppleTranscriptionService: TranscriptionService {
         let installedIdentifiers = Set(installedLocales.map { $0.identifier(.bcp47) })
         let isLocaleSupported = supportedIdentifiers.contains(locale.identifier(.bcp47))
         let isLocaleInstalled = installedIdentifiers.contains(locale.identifier(.bcp47))
-        
+
         let selectedLocaleIdentifier = locale.identifier(.bcp47)
         let displayName = languageDisplayName(for: selectedLocaleIdentifier)
 
@@ -82,16 +91,16 @@ class NativeAppleTranscriptionService: TranscriptionService {
             logger.error("Transcription failed: Assets for '\(selectedLocaleIdentifier, privacy: .public)' are not downloaded.")
             throw ServiceError.assetDownloadRequired(displayName)
         }
-        
+
         let transcriber = SpeechTranscriber(
             locale: locale,
             transcriptionOptions: [],
             reportingOptions: [],
             attributeOptions: []
         )
-        
+
         await ensureModelIsReserved(for: locale, transcriber: transcriber)
-        
+
         let modules: [any SpeechModule] = [transcriber]
         let analyzer = SpeechAnalyzer(modules: modules)
         let resultTask = Task<String, Error> {
@@ -118,7 +127,7 @@ class NativeAppleTranscriptionService: TranscriptionService {
             await analyzer.cancelAndFinishNow()
             throw error
         }
-        
+
         let resultTimeout = max(20.0, audioDuration * 4.0 + 10.0)
         let finalTranscription: String
         do {
@@ -138,9 +147,9 @@ class NativeAppleTranscriptionService: TranscriptionService {
         throw ServiceError.unsupportedOS
         #endif
     }
-    
-    
-    
+
+
+
     @available(macOS 26, *)
     private func ensureModelIsReserved(for locale: Locale, transcriber: SpeechTranscriber) async {
         #if canImport(Speech) && ENABLE_NATIVE_SPEECH_ANALYZER
@@ -196,4 +205,40 @@ class NativeAppleTranscriptionService: TranscriptionService {
             }
         }
     }
-} 
+}
+
+#else
+
+class NativeAppleTranscriptionService: TranscriptionService {
+    enum ServiceError: Error, LocalizedError {
+        case unsupportedOS
+        case transcriptionFailed
+        case localeNotSupported
+        case invalidModel
+        case assetDownloadRequired(String)
+        case resultStreamTimedOut
+
+        var errorDescription: String? {
+            switch self {
+            case .unsupportedOS:
+                return "SpeechAnalyzer requires macOS 26 or later."
+            case .transcriptionFailed:
+                return "Transcription failed using SpeechAnalyzer."
+            case .localeNotSupported:
+                return "The selected language is not supported by SpeechAnalyzer."
+            case .invalidModel:
+                return "Invalid model type provided for Native Apple transcription."
+            case .assetDownloadRequired(let displayName):
+                return "Download required for \(displayName)."
+            case .resultStreamTimedOut:
+                return "Apple Speech did not finish returning transcription results."
+            }
+        }
+    }
+
+    func transcribe(audioURL: URL, model: any TranscriptionModel) async throws -> String {
+        throw ServiceError.unsupportedOS
+    }
+}
+
+#endif
