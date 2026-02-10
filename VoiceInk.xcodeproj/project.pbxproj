@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5160C3D82F3AEEF200519D48 /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = E11BBA4D2E5DC555000AB839 /* FluidAudio */; };
+		5160C3D92F3AEEF200519D48 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = E1342C1E2EB4844800CED8A2 /* Atomics */; };
 		51FFA9F62E40AE390019833B /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51FFA9F42E40ADBE0019833B /* whisper.xcframework */; };
 		51FFA9F72E40AE390019833B /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51FFA9F42E40ADBE0019833B /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E10F06092E3F390600F7FBDC /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = E10F06082E3F390600F7FBDC /* FluidAudio */; };
@@ -18,7 +20,6 @@
 		E1ECEC162E44591300DFFBA8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = E1ECEC152E44591300DFFBA8 /* Zip */; };
 		E1F1037B2EF85FC700A4FF94 /* SelectedTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = E1F1037A2EF85FC700A4FF94 /* SelectedTextKit */; };
 		E1F350112F1D10D600790A2C /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A0BD052EB1E7B800266859 /* whisper.xcframework */; };
-		E1F350122F1D10D600790A2C /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1A0BD052EB1E7B800266859 /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,11 +97,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1342C1F2EB4844800CED8A2 /* Atomics in Frameworks */,
+				5160C3D92F3AEEF200519D48 /* Atomics in Frameworks */,
+				5160C3D82F3AEEF200519D48 /* FluidAudio in Frameworks */,
 				E1F350112F1D10D600790A2C /* whisper.xcframework in Frameworks */,
 				E1ECEC162E44591300DFFBA8 /* Zip in Frameworks */,
 				E1ADD45A2CC5352A00303ECB /* LaunchAtLogin in Frameworks */,
-				E11BBA4E2E5DC555000AB839 /* FluidAudio in Frameworks */,
 				E1D7EF992E35E16C00640029 /* MediaRemoteAdapter in Frameworks */,
 				E10F06092E3F390600F7FBDC /* FluidAudio in Frameworks */,
 				51FFA9F62E40AE390019833B /* whisper.xcframework in Frameworks */,
